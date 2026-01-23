@@ -6,7 +6,7 @@ router.post("/", async (req, res) =>{
 
     const [exist] = await db.query("select * from utilities where room_id = ? and month = ?", [id, month])
     if (exist.length > 0){
-        const [rows] = await db.query("update utilities set electric_old = ?, electric_new = ?, water_old = ?, water_new = ?, month = ? where room_id = ? and month = ?", [ elOld, elNew, wOld, wNew, id, month, month])
+        const [rows] = await db.query("update utilities set electric_old = ?, electric_new = ?, water_old = ?, water_new = ?, month = ? where room_id = ? and month = ?", [ elOld, elNew, wOld, wNew, month, id, month])
         return res.json({message: `utilitiy updated for room id ${id}`})
     }
     else{

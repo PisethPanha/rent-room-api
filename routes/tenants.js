@@ -33,14 +33,17 @@ router.post("/update", async (req, res) => {
   res.json({ message: "Tenant updated" });
 });
 router.post("/delete", async (req, res) => {
-  const {id } = req.body;
+  const {id, room_id } = req.body;
 
   await db.query(
     "delete from tenants where id = ?",
     [id]
   );
+  await db.query("update rooms set status = 'Available' where id = ?", [room_id])
 
   res.json({ message: "Tenant deleted" });
 });
+
+
 
 module.exports = router;

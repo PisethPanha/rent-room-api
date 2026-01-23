@@ -37,6 +37,10 @@ router.post("/delete", async (req, res) => {
     "delete from rooms where id = ?",
     [id]
   );
+  await db.query(
+    "delete from tenants where room_id = ?",
+    [id]
+  );
 
   res.json({ message: "Room deleted" });
 });
